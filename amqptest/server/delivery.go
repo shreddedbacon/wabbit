@@ -11,17 +11,19 @@ type (
 		consumerTag   string
 		originalRoute string
 		messageId     string
+		appId         string
 		channel       *Channel
 	}
 )
 
-func NewDelivery(ch *Channel, data []byte, tag uint64, messageId string, hdrs wabbit.Option) *Delivery {
+func NewDelivery(ch *Channel, data []byte, tag uint64, messageId string, appId string, hdrs wabbit.Option) *Delivery {
 	return &Delivery{
 		data:      data,
 		headers:   hdrs,
 		channel:   ch,
 		tag:       tag,
 		messageId: messageId,
+		appId:     appId,
 	}
 }
 
@@ -55,4 +57,8 @@ func (d *Delivery) ConsumerTag() string {
 
 func (d *Delivery) MessageId() string {
 	return d.messageId
+}
+
+func (d *Delivery) AppId() string {
+	return d.appId
 }

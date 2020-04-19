@@ -62,6 +62,7 @@ type (
 		DeliveryTag() uint64
 		ConsumerTag() string
 		MessageId() string
+		AppId() string
 	}
 
 	// Confirmation is an interface to confrimation messages

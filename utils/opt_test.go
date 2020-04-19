@@ -35,6 +35,10 @@ func TestConvertOptDefaults(t *testing.T) {
 		t.Errorf("Invalid default message ID: %s\n", opt.MessageId)
 	}
 
+	if opt.AppId != "" {
+		t.Errorf("Invalid default app ID: %s\n", opt.AppId)
+	}
+
 	if len(opt.Headers) != 0 {
 		t.Errorf("Invalid value for headers: %v", opt.Headers)
 	}
@@ -96,6 +100,19 @@ func TestConvertOpt(t *testing.T) {
 
 	if opt.MessageId != "12345" {
 		t.Errorf("Invalid value for messageId: %s", opt.MessageId)
+	}
+
+	opt, err = ConvertOpt(wabbit.Option{
+		"appId": "12345",
+	})
+
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if opt.AppId != "12345" {
+		t.Errorf("Invalid value for appId: %s", opt.AppId)
 	}
 
 	// setting invalid value
